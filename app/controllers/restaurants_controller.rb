@@ -53,11 +53,5 @@ class RestaurantsController < ApplicationController
 
   def restaurant_params
     params.require(:restaurant).permit(:name, :address, :city, :price_range, :summary, :menu)
-    # t.string   "name"
-    # t.string   "address"
-    # t.string   "city"
-    # t.integer  "price_range"
-    # t.text     "summary"
-    # t.text     "menu"
   end
 end
