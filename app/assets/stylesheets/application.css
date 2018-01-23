@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+
+body, * {
+  margin: 0px;
+  font-family: Helvetica, Arial, monospace;
+}
+
+.headerimg {
+  height: auto;
+  width: 100%;
+  border: 1px black solid;
+}
+
+header {
+  position: relative;
+}
+
+.textoverimg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    weight: 900;
+    font-size: 78px;
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+}
