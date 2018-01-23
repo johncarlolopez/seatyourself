@@ -7,7 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<header>
+  <%= image_tag("header_img_seatyourself", :alt => "Food Image Header", :class => "headerimg") %>
+    <div class="textoverimg">
+      <p>SeatYourself!</p>
+    </div>
+</header>
 <%= yield %>
 
 </body>
