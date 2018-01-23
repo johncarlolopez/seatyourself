@@ -10,7 +10,7 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = Restaurant.new(reservation_params)
+    @reservation = Reservation.new(reservation_params)
     if @reservation.save
       flash[:notice] = "Reservation successfully booked"
      redirect_to restaurant_path(@restaurant.id)
