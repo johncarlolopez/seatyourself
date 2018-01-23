@@ -22,11 +22,11 @@ class ReservationsController < ApplicationController
   private
 
   def new_reservation
-    @restaurant = Restaurant.new
+    @reservation = Reservation.new
   end
 
   def load_restaurant
-    @restaurant = Restaurant.find(params[:restaurant_id)
+    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 
   def reservation_params
