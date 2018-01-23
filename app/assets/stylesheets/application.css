@@ -43,3 +43,23 @@ header {
       -1px 1px 0 #000,
       1px 1px 0 #000;
 }
+
+nav a {
+  text-decoration: none;
+  font-size: 25px;
+  weight: 200;
+  margin-left: 10px;
+  text-align: center;
+}
+
+nav {
+  margin: 10px;
+  text-align: center;
+}
+
+.restaurantindex {
+  margin: 15px;
+}
+.restaurantindex a {
+  text-decoration: none;
+}

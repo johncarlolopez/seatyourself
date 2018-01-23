@@ -12,7 +12,12 @@
     <div class="textoverimg">
       <p>SeatYourself!</p>
     </div>
+    <nav>
+        <%= link_to("Home", root_path) %>
+        <%= link_to("New Restaurant", new_restaurant_path) %>
+    </nav>
 </header>
+
 <%= yield %>
 
 </body>
