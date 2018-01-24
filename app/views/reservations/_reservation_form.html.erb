@@ -1,14 +1,14 @@
 <%= form_for ([restaurant,reservation]) do |f| %>
   <p>
-    <%= f.label :name  %>
+    <%= f.label 'Restaurant'  %>:
     <%= restaurant.name %>
   </p>
   <p>
-    <%= f.label :party_size  %>
-    <%= f.number_field :party_size %>
+    <%= f.label :party_size  %>:
+    <%= f.text_field :party_size %>
   </p>
   <p>
-    <%= f.label :time  %>
+    <%= f.label :time  %>:
     <%= f.datetime_select :time %>
   </p>
   <p>
