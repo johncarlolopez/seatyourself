@@ -22,7 +22,7 @@ body, * {
 .headerimg {
   height: auto;
   width: 100%;
-  border: 1px black solid;
+  margin: 0px;
 }
 
 header {
@@ -31,7 +31,7 @@ header {
 
 .textoverimg {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
@@ -50,16 +50,47 @@ nav a {
   weight: 200;
   margin-left: 10px;
   text-align: center;
+  color: black;
+}
+
+nav a:hover {
+  color: white;
+  background-color: crimson;
+  padding: 5px;
 }
 
 nav {
-  margin: 10px;
+  margin-top: -4px;
   text-align: center;
+  background-color: wheat;
+  padding: 10px;
 }
 
 .restaurantindex {
   margin: 15px;
 }
+
 .restaurantindex a {
   text-decoration: none;
+}
+
+.flexcontainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  
+}
+
+.card {
+  margin: 10px;
+  border: 1px solid black;
+  background-color: wheat;
+}
+
+.flexcontainer a {
+  width: 30%;
+}
+
+.card p {
+  margin: 15px;
 }

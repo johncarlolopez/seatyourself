@@ -1,6 +1,8 @@
+<div class="flexcontainer">
+
 <% @restaurants.each do |restaurant| %>
   <%= link_to restaurant_path(restaurant.id) do %>
-    <div class="restaurantindex">
+    <div class="card">
       <p><strong>Name:</strong> <%= restaurant.name %></p>
       <p><strong>Address:</strong> <%= restaurant.address %></p>
       <p><strong>City:</strong> <%= restaurant.city %></p>
@@ -8,6 +10,7 @@
       <p><strong>Summary:</strong> <%= restaurant.summary %></p>
       <p><strong>Menu:</strong> <%= restaurant.menu %></p>
     </div>
-    <hr>
   <% end %>
 <% end %>
+
+</div>
