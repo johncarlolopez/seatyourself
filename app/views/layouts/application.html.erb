@@ -24,6 +24,23 @@
     </nav>
 </header>
 
+
+<% if flash[:alert] %>
+<div class="errors">
+    <% flash[:alert].each do |message| %>
+      <strong><%= message %></strong>
+    <% end %>
+    </div>
+<% end %>
+
+
+<% if @reservation && @reservation.errors.any? %>
+  <% @reservation.errors.full_messages.each do |msg| %>
+    <%= msg %>
+  <% end %>
+<% end %>
+
+
 <%= yield %>
 
 </body>

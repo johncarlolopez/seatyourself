@@ -2,6 +2,8 @@ class ReservationsController < ApplicationController
 
   before_action :new_reservation, only: [:new, :create]
   before_action :load_restaurant, only: [:show, :new, :create]
+  before_action :ensure_login
+
 
   def show
   end
@@ -11,6 +13,7 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
+    puts @reservation.validates_time
     if @reservation.save
       flash[:notice] = "Reservation successfully booked"
      redirect_to restaurant_path(@restaurant.id)

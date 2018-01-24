@@ -1,2 +1,9 @@
 <h1>Book Reservation</h1>
+<% if flash[:alert] %>
+  <div class="errors">
+    <% flash[:alert].each do |message| %>
+      <strong><%= message.full_message %></strong>
+    <% end %>
+</div>
+<% end %>
 <%= render 'reservation_form', restaurant: @restaurant, reservation: @reservation  %>
