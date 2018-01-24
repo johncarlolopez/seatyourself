@@ -12,10 +12,16 @@ class ReservationsController < ApplicationController
   end
 
   def create
+    flash[:alert] = []
     @reservation = Reservation.new(reservation_params)
-    puts @reservation.validates_time
-    if @reservation.save
-      flash[:notice] = "Reservation successfully booked"
+    @reservation.restaurant_id = params[:restaurant_id]
+    if @reservation.validates_reservation.any?
+      @reservation.validates_reservation.each {|error|
+        flash[:alert] << error
+      }
+      render :new
+    elsif @reservation.save
+     flash[:notice] = "Reservation successfully booked"
      redirect_to restaurant_path(@restaurant.id)
     else
       render :new
@@ -33,6 +39,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:time, :party_size, :restaurant)
+    params.require(:reservation).permit(:time, :party_size)
   end
 end
