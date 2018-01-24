@@ -19,6 +19,11 @@ body, * {
   font-family: Helvetica, Arial, monospace;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .headerimg {
   height: auto;
   width: 100%;
