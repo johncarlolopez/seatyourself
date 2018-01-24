@@ -51,6 +51,8 @@ nav a {
   margin-left: 10px;
   text-align: center;
   color: black;
+  padding: 5px;
+  border: 1px solid black;
 }
 
 nav a:hover {
@@ -78,7 +80,7 @@ nav {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  
+
 }
 
 .card {
