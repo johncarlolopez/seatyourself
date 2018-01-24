@@ -20,4 +20,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @reservations = User.find(session[:user_id]).reservations
+
+  end
+
 end

@@ -14,6 +14,7 @@ class ReservationsController < ApplicationController
   def create
     flash[:alert] = []
     @reservation = Reservation.new(reservation_params)
+    @reservation.user_id = current_user.id
     @reservation.restaurant_id = params[:restaurant_id]
     if @reservation.validates_reservation.any?
       @reservation.validates_reservation.each {|error|
