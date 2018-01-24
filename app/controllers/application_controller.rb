@@ -8,4 +8,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def ensure_login
+    if !session[:user_id]
+      flash[:alert] = ["You must be logged in!"]
+      redirect_to root_path
+    end
+  end
+
 end
