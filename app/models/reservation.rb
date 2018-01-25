@@ -11,11 +11,11 @@ class Reservation < ApplicationRecord
       # Need to fix if time goes over 12 PM midnight
       if closing_time.to_f > opening_time.to_f
         unless (ctime.to_f >= opening_time.to_f) && (ctime.to_f < closing_time.to_f)
-          errors << "Reservation must be between #{opening_time} and #{closing_time}"
+          errors << "Reservation must be between #{opening_time.strftime("%H:%M")} and #{closing_time.strftime("%H:%M")}"
         end
       else
         unless (ctime.to_f >= opening_time.to_f)
-          errors << "Reservation must be between #{opening_time} and #{closing_time}"
+          errors << "Reservation must be between #{opening_time.strftime("%H:%M")} and #{closing_time.strftime("%H:%M")}"
         end
       end
 
@@ -24,12 +24,16 @@ class Reservation < ApplicationRecord
       self.restaurant.reservations.each {|reservation|
         remaining_capacity -= reservation.party_size
       }
-      if party_size > remaining_capacity
+      if party_size && (party_size > remaining_capacity)
         errors << "Sorry we are overbooked"
       end
     # Must be after current time
       unless time.to_f >= DateTime.now.to_f
         errors << "Sorry, we can't book a reservation in the past"
+      end
+    # Make sure reservation is not empty
+      unless party_size == true
+        errors << "Please enter a party size"
       end
     return errors
   end

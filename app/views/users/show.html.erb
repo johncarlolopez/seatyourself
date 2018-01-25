@@ -1,3 +1,12 @@
+<p>
+  Loyalty Points:
+  <% if @user.loyalty_points %>
+    <%= @user.loyalty_points %>
+  <% else  %>
+    <%= 0 %>
+  <% end  %>
+</p>
+
 <% @reservations.each do |reservation| %>
   <p>Time: <%=  reservation.time %></p>
   <p>Restaurant Name: <%=  reservation.restaurant_id %></p>
