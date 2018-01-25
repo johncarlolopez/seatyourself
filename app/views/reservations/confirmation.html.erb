@@ -1,0 +1,23 @@
+<h1>Please confirm reservation:</h1>
+
+<div class="cardshow">
+<%= form_for ([@restaurant,@reservation]) do |f| %>
+  <p>
+    <%= f.label 'Restaurant'  %>:
+    <%= @restaurant.name %>
+  </p>
+  <p>
+    <%= f.label :party_size  %>:
+    <%= @reservation.party_size %>
+    <%= f.hidden_field :party_size, :value => @reservation.party_size %>
+  </p>
+  <p>
+    <%= f.label :time  %>:
+    <%= @reservation.time %>
+    <%= f.hidden_field :time, :value => @reservation.time%>
+  </p>
+  <p>
+  <%= f.submit "Confirm" %>
+  </p>
+<% end %>
+</div>

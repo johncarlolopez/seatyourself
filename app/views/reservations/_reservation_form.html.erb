@@ -1,5 +1,5 @@
 <div class="cardshow">
-<%= form_for ([restaurant,reservation]) do |f| %>
+<%= form_for [restaurant,reservation], :url => "/restaurants/#{restaurant.id}/reservations/confirmation" do |f| %>
   <p>
     <%= f.label 'Restaurant'  %>:
     <%= restaurant.name %>
