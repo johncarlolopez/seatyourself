@@ -10,7 +10,7 @@
   </p>
   <p>
     <%= f.label :time  %>:
-    <%= f.datetime_select :time %>
+    <%= f.datetime_select :time, minute_step: 60  %>
   </p>
   <p>
   <%= f.submit %>
