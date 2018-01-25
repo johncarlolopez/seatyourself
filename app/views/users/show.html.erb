@@ -38,3 +38,27 @@
 </div>
 <br>
 <% end %>
+
+<div class="cardshow">
+  <p>
+    <% if current_user.role.id == 2 %>
+      <% @owned_reservations.each do |reservation| %>
+        <p><strong>Time:</strong> <%=  reservation.time %></p>
+        <p><strong>Restaurant Name:</strong> <%=  reservation.restaurant.name %></p>
+        <p><strong>Party Size:</strong> <%=  reservation.party_size %></p>
+      <% end %>
+    <% end %>
+    <br>
+  </p>
+</div>
+
+<div class="cardshow">
+  <p>
+    <% if current_user.role.id == 2 %>
+      <% @customers.each do |customer| %>
+        <p><strong>Customer:</strong> <%= customer.name %><strong>Loyalty:</strong> <%= customer.loyalty_points %></p>
+      <% end %>
+    <% end %>
+    <br>
+  </p>
+</div>

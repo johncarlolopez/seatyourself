@@ -8,9 +8,14 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   def add_loyalty(points)
-    loyalty_points = 0 unless loyalty_points
-    loyalty_points += points
-    self.update(loyalty_points: loyalty_points)
+    puts "Loyalty before: #{loyalty_points}"
+    unless (self.loyalty_points)
+      self.loyalty_points = 0
+    end
+    puts "Loyalty after checking if nil: #{loyalty_points}"
+    self.loyalty_points += points
+    puts "Loyalty after adding: #{loyalty_points}"
+    self.update(loyalty_points: self.loyalty_points)
     return true
   end
 end

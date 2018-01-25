@@ -25,6 +25,16 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
     @reservations = @user.reservations
     @restaurants = @user.restaurants
+    @owned_reservations = []
+    @customers = []
+    @restaurants.each {|restaurant|
+      restaurant.reservations.each {|reservation|
+        @owned_reservations << reservation
+        @customers << reservation.user
+      }
+    }
+    @customers.uniq!.sort_by!(&:loyalty_points).reverse!
+
   end
 
 end

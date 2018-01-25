@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125194937) do
+ActiveRecord::Schema.define(version: 20180125234412) do
 
   create_table "reservations", force: :cascade do |t|
     t.datetime "time"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20180125194937) do
     t.time     "opening_time"
     t.time     "closing_time"
     t.integer  "user_id"
+    t.integer  "min_party"
+    t.integer  "max_party"
   end
 
   create_table "roles", force: :cascade do |t|

@@ -64,32 +64,38 @@ class ReservationsController < ApplicationController
     # search if timeslot exists? Use Timeslot.find_by(timing, day, restaurant_id)
     # timeslot = Timeslot.find_by(timing: @reservation.time, restaurant_id: @restaurant.id)
     timeslot = Timeslot.where("timing = ? AND restaurant_id = ?", @reservation.time, @restaurant.id).first
-    puts "**************"
-      ap timeslot
-    puts "**************"
-
+    if @reservation.party_size > @restaurant.capacity
+      flash[:alert] = []
+      flash[:alert] << "Sorry we do not have enough space to accomodate your party size"
+      redirect_to new_restaurant_reservation_path(@restaurant.id) and return
+    end
 
     unless timeslot
       # if it doesnt exist create time slot - Timeslow.new using variables
-      Timeslot.create(timing: @reservation.time, day: @reservation.time, capacity: @restaurant.capacity-@reservation.party_size, restaurant_id: @restaurant.id)
+      timeslot = Timeslot.create(timing: @reservation.time, day: @reservation.time, capacity: @restaurant.capacity-@reservation.party_size, restaurant_id: @restaurant.id)
     else
       # Set reservation.timeslot_id to that timeslot.id
+      if @reservation.party_size > timeslot.capacity
+        flash[:alert] = []
+        flash[:alert] << "Sorry we do not have enough remaining space to accomodate your party size"
+        redirect_to new_restaurant_reservation_path(@restaurant.id) and return
+      end
       @reservation.timeslot_id = timeslot.id
       new_capacity = timeslot.capacity - @reservation.party_size
       timeslot.update(capacity: new_capacity)
     end
-
+    @reservation.timeslot_id = timeslot.id
     if @reservation.validates_reservation.any?
       @reservation.validates_reservation.each { |error|
         flash[:alert] << error
       }
-      render :new
+      redirect_to new_restaurant_reservation_path(@restaurant.id) and return
     elsif @reservation.save
      default_loyalty = 100
      flash[:alert] = []
      flash[:alert] << "Reservation successfully booked"
      @reservation.user.add_loyalty(default_loyalty)
-     redirect_to restaurant_path(@restaurant.id)
+     redirect_to restaurant_path(@restaurant.id) and return
     else
       render :new
     end
