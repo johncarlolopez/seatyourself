@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(session[:user_id])
     @reservations = @user.reservations
-    
+    @restaurants = @user.restaurants
   end
 
 end

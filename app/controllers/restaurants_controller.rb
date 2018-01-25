@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
   before_action :new_restaurant, only: [:new, :create]
   before_action :load_restaurant, only: [:show, :edit, :update,  :destroy]
+  before_action :ensure_ownership, only: [:edit, :update]
 
   def index
     @restaurants = Restaurant.all
@@ -14,6 +15,7 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
+    @restaurant.user_id = current_user.id
     if @restaurant.save
       flash[:notice] = "New restaurant successfully added"
      redirect_to restaurant_path(@restaurant.id)
@@ -53,4 +55,15 @@ class RestaurantsController < ApplicationController
   def restaurant_params
     params.require(:restaurant).permit(:name, :address, :city, :price_range, :summary, :menu, :restaurant_id)
   end
+
+  def ensure_ownership
+    if session[:user_id] != @restaurant.user_id
+      flash[:alert] = ["You don't own this restaurant!"]
+      redirect_to root_path
+    end
+  end
+
+
+
+
 end

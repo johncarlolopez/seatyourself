@@ -1,24 +1,32 @@
-<h1>Sign Up</h1>
+<div class="cardshow">
+
+<p><strong>Sign Up</strong></p>
 
 <%= form_for @user do |f| %>
 
-  <div>
+  <p>
     <%= f.label :name %> <br />
     <%= f.text_field :name %>
-  </div>
+  </p>
 
-  <div>
+  <p>
+    <%= f.label :role  %>:
+    <%= f.select :role, [['Customer', 1], ['Restaurant Owner', 2]] %>
+  </p>
+
+  <p>
      <%= f.label :password %><br />
      <%= f.password_field :password %>
-  </div>
+  </p>
 
-  <div>
+  <p>
      <%= f.label :password_confirmation %><br />
      <%= f.password_field :password_confirmation %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= f.submit "Save" %>
-  </div>
+  </p>
 
 <% end %>
+</div>

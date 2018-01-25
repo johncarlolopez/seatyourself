@@ -1,8 +1,12 @@
-<div class="restaurantindex">
+<div class="cardshow">
 <%= form_for restaurant do |f| %>
   <p>
     <%= f.label :name  %>
     <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :city  %>
+    <%= f.text_field :city %>
   </p>
   <p>
     <%= f.label :address  %>
@@ -14,11 +18,11 @@
   </p>
   <p>
     <%= f.label :summary  %>
-    <%= f.text_field :summary %>
+    <%= f.text_area :summary %>
   </p>
   <p>
     <%= f.label :menu  %>
-    <%= f.text_field :menu %>
+    <%= f.text_area :menu %>
   </p>
   <p>
   <%= f.submit %>
