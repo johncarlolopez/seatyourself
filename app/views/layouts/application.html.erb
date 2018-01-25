@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Seatyourself</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
-<header>
-  <%= image_tag("header_img_seatyourself", :alt => "Food Image Header", :class => "headerimg") %>
-    <div class="textoverimg">
-      <p>SeatYourself!</p>
-    </div>
-    <nav>
-        <%= link_to("Home", root_path) %>
-        <%= link_to("New Restaurant", new_restaurant_path) %>
-        <% if current_user %>
-        <%= link_to("Profile ( #{current_user.name} | #{current_user.role.role} )", user_profile_path) %>
-        <%= link_to "Logout", session_path("current"), method: :delete %>
-          <% else %>
-        <%= link_to "Login", new_session_path %>
-        <%= link_to "Signup", new_user_path %>
-      <% end %>
-    </nav>
-</header>
+  <header>
+    <%= image_tag("header_img_seatyourself", :alt => "Food Image Header", :class => "headerimg") %>
+      <div class="textoverimg">
+        <p>SeatYourself!</p>
+      </div>
+      <nav>
+          <%= link_to("Home", root_path) %>
+          <%= link_to("New Restaurant", new_restaurant_path) %>
+          <% if current_user %>
+          <%= link_to("Profile ( #{current_user.name} | #{current_user.role.role} )", user_profile_path) %>
+          <%= link_to "Logout", session_path("current"), method: :delete %>
+            <% else %>
+          <%= link_to "Login", new_session_path %>
+          <%= link_to "Signup", new_user_path %>
+        <% end %>
+      </nav>
+  </header>
 
-<% if flash[:alert]%>
-<div class="errors">
-  <% flash[:alert].each do |message| %>
-    <p><strong><%= message %></strong></p>
-  <% end  %>
-</div>
-<% end %>
-
-<% if @reservation && @reservation.errors.any? %>
-  <% @reservation.errors.full_messages.each do |msg| %>
-    <%= msg %>
+  <% if flash[:alert]%>
+  <div class="errors">
+    <% flash[:alert].each do |message| %>
+      <p><strong><%= message %></strong></p>
+    <% end  %>
+  </div>
   <% end %>
-<% end %>
 
+  <% if @reservation && @reservation.errors.any? %>
+    <% @reservation.errors.full_messages.each do |msg| %>
+      <%= msg %>
+    <% end %>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

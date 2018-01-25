@@ -1,11 +1,14 @@
-<p>
-  Loyalty Points:
-  <% if @user.loyalty_points %>
-    <%= @user.loyalty_points %>
-  <% else  %>
-    <%= 0 %>
-  <% end  %>
-</p>
+<div class="cardshow">
+  <p>
+    Loyalty Points:
+    <% if @user.loyalty_points %>
+      <%= @user.loyalty_points %>
+    <% else  %>
+      <%= 0 %>
+    <% end  %>
+  </p>
+</div>
+<br>
 <% if @reservations && @reservations.any?  %>
 <div class="cardshow">
     <% @reservations.each do |reservation| %>

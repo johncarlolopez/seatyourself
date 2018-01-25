@@ -13,11 +13,32 @@ class ReservationsController < ApplicationController
 
   def create
     flash[:alert] = []
+    @timeslot = Timeslot.new()
     @reservation = Reservation.new(reservation_params)
     @reservation.user_id = current_user.id
     @reservation.restaurant_id = params[:restaurant_id]
+
+    # Split reservation time into two variables, one for day, one for hour
+    reservation_time = @reservation.time.strftime("%H")
+    reservation_day = @reservation.time.strftime("%F")
+
+    puts reservation_day.class
+    # search if timeslot exists? Use Timeslot.find_by(timing, day, restaurant_id)
+    timeslot = Timeslot.find_by(timing: reservation_time, day: reservation_day, restaurant_id: @restaurant.id)
+
+    if timeslot == nil
+
+    # if it doesnt exist create time slot - Timeslow.new using variables
+
+    Timeslot.create(timing: reservation_time, day: reservation_day, capacity: @restaurant.capacity, restaurant_id: @restaurant.id)
+    else
+
+    # Set reservation.timeslot_id to that timeslot.id
+    @reservation.timeslot_id = timeslot.id
+  end
+
     if @reservation.validates_reservation.any?
-      @reservation.validates_reservation.each {|error|
+      @reservation.validates_reservation.each { |error|
         flash[:alert] << error
       }
       render :new
@@ -45,4 +66,5 @@ class ReservationsController < ApplicationController
   def reservation_params
     params.require(:reservation).permit(:time, :party_size)
   end
+
 end
