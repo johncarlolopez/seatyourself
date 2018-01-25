@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
 
   get '/user/profile', to: 'users#show'
+  post '/restaurants/:restaurant_id/reservations/confirmation', to: 'reservations#confirmation'
 
   resources :sessions, only: [:new, :create, :destroy]
 

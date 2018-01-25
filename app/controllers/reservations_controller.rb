@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
 
-  before_action :new_reservation, only: [:new, :create]
-  before_action :load_restaurant, only: [:show, :new, :create]
+  before_action :new_reservation, only: [:new, :create, :confirmation]
+  before_action :load_restaurant, only: [:show, :new, :create, :confirmation]
   before_action :ensure_login
 
 
@@ -9,6 +9,13 @@ class ReservationsController < ApplicationController
   end
 
   def new
+  end
+
+  def confirmation
+    # render :confirmation
+    @reservation = Reservation.new(reservation_params)
+    @reservation.user_id = current_user.id
+    @reservation.restaurant_id = params[:restaurant_id]
   end
 
   def create

@@ -32,7 +32,7 @@ class Reservation < ApplicationRecord
         errors << "Sorry, we can't book a reservation in the past"
       end
     # Make sure reservation is not empty
-      unless party_size == true
+      unless party_size
         errors << "Please enter a party size"
       end
     return errors
