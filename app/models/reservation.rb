@@ -1,6 +1,7 @@
 class Reservation < ApplicationRecord
   belongs_to :restaurant
   belongs_to :user
+  has_many :timeslots
 
   def validates_reservation
     errors = []
@@ -37,5 +38,10 @@ class Reservation < ApplicationRecord
       end
     return errors
   end
+
+  def timeslot
+
+  end
+
 
 end
