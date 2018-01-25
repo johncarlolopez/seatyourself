@@ -17,12 +17,24 @@
     <%= f.number_field :price_range %>
   </p>
   <p>
+    <%= f.label :capacity  %>
+    <%= f.number_field :capacity %>
+  </p>
+  <p>
     <%= f.label :summary  %>
     <%= f.text_area :summary %>
   </p>
   <p>
     <%= f.label :menu  %>
     <%= f.text_area :menu %>
+  </p>
+  <p>
+    <%= f.label :opening_time  %>
+    <%= f.time_select :opening_time, minute_step: 60 %>
+  </p>
+  <p>
+    <%= f.label :closing_time  %>
+    <%= f.time_select :closing_time, minute_step: 60 %>
   </p>
   <p>
   <%= f.submit %>
