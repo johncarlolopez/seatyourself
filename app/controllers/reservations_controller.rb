@@ -22,7 +22,10 @@ class ReservationsController < ApplicationController
       }
       render :new
     elsif @reservation.save
-     flash[:notice] = "Reservation successfully booked"
+     default_loyalty = 100
+     flash[:alert] = []
+     flash[:alert] << "Reservation successfully booked"
+     @reservation.user.add_loyalty(default_loyalty)
      redirect_to restaurant_path(@restaurant.id)
     else
       render :new

@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20180125152721) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "loyalty_points"
     t.integer  "role_id"
   end
 

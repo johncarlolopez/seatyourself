@@ -25,12 +25,12 @@
     </nav>
 </header>
 
-<% if flash[:alert] %>
-  <div class="errors">
-    <% flash[:alert].each do |message| %>
-      <p><strong><%= message %></strong></p>
-    <% end  %>
-  </div>
+<% if flash[:alert]%>
+<div class="errors">
+  <% flash[:alert].each do |message| %>
+    <p><strong><%= message %></strong></p>
+  <% end  %>
+</div>
 <% end %>
 
 <% if @reservation && @reservation.errors.any? %>

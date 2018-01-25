@@ -28,8 +28,7 @@ class RestaurantsController < ApplicationController
   end
 
   def update
-    @restaurant.update(restaurant_params)
-    if @restaurant.save
+    if @restaurant.update(restaurant_params)
       flash[:notice] = "Restaurant successfully updated"
      redirect_to restaurant_path(@restaurant.id)
     else
