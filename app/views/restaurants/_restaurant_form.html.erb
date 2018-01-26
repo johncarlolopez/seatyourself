@@ -37,6 +37,14 @@
     <%= f.time_select :closing_time, minute_step: 60 %>
   </p>
   <p>
+    <%= f.label :min_party  %>
+    <%= f.text_area :min_party %>
+  </p>
+  <p>
+    <%= f.label :max_party  %>
+    <%= f.text_area :max_party %>
+  </p>
+  <p>
   <%= f.submit %>
   </p>
 <% end %>

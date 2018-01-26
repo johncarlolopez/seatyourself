@@ -30,11 +30,22 @@ class UsersController < ApplicationController
     @restaurants.each {|restaurant|
       restaurant.reservations.each {|reservation|
         @owned_reservations << reservation
-        @customers << reservation.user
+        if reservation.user.loyalty_points != nil
+         @customers << reservation.user
+        end
       }
     }
-    @customers.uniq!.sort_by!(&:loyalty_points).reverse!
-
+    if @customers.any? && (@customers.count > 1)
+      @customers.uniq!.sort_by!(&:loyalty_points).reverse!
+    else
+      @customers.sort_by!(&:loyalty_points)
+    end
+    @reservations_within_week = []
+    @owned_reservations.each {|reservation|
+      if reservation.time.to_f < (Time.now + 1.week).utc.to_f
+        @reservations_within_week << reservation
+      end
+    }
   end
 
 end

@@ -1,6 +1,7 @@
 <div class="cardshow">
+  <h3>Loyalty</h3>
   <p>
-    Loyalty Points:
+    Points:
     <% if @user.loyalty_points %>
       <%= @user.loyalty_points %>
     <% else  %>
@@ -11,6 +12,7 @@
 <br>
 <% if @reservations && @reservations.any?  %>
 <div class="cardshow">
+  <h3>Your Reservations</h3>
     <% @reservations.each do |reservation| %>
     <p><strong>Time:</strong> <%=  reservation.time %></p>
     <p><strong>Restaurant Name:</strong> <%=  reservation.restaurant.name %></p>
@@ -23,6 +25,7 @@
 
 <% if @restaurants && @restaurants.any? %>
 <div class="cardshow">
+  <h3>Your Restaurants</h3>
   <p>
     <% if current_user.role.id == 2 %>
       <% @restaurants.each do |restaurant| %>
@@ -40,9 +43,10 @@
 <% end %>
 
 <div class="cardshow">
+  <h3>Reservations in owned restaurants within a week</h3>
   <p>
     <% if current_user.role.id == 2 %>
-      <% @owned_reservations.each do |reservation| %>
+      <% @reservations_within_week.each do |reservation| %>
         <p><strong>Time:</strong> <%=  reservation.time %></p>
         <p><strong>Restaurant Name:</strong> <%=  reservation.restaurant.name %></p>
         <p><strong>Party Size:</strong> <%=  reservation.party_size %></p>
@@ -52,7 +56,9 @@
   </p>
 </div>
 
+
 <div class="cardshow">
+  <h3>Top Customer loyalty in your Restaurants</h3>
   <p>
     <% if current_user.role.id == 2 %>
       <% @customers.each do |customer| %>

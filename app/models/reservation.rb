@@ -36,6 +36,12 @@ class Reservation < ApplicationRecord
       unless party_size
         errors << "Please enter a party size"
       end
+    # Make sure party_size is within min and max
+      max = self.restaurant.max_party
+      min = self.restaurant.min_party
+      if (party_size > max) || (party_size < min)
+        errors << "Party size must be #{min} - #{max}"
+      end
     return errors
   end
 
