@@ -24,14 +24,7 @@ class RestaurantsController < ApplicationController
         @restaurant_slots << time
       }
     end
-    # puts "*************"
-    # puts @restaurant_slots
-    # puts "*************"
 
-    # Remove timeslots that are already full
-    # @restaurant.timeslots.each {|timeslot|
-    #   ap timeslot
-    # }
     @available_slots = []
     puts '*****************'
     ap @restaurant.timeslots
@@ -42,23 +35,10 @@ class RestaurantsController < ApplicationController
         slot = slot.to_s
       end
       search = Time.now.utc.strftime("%d %b %Y")
-      # ap search
-      # search = "%" + search + " " + slot + "%"
       search = DateTime.parse(search + " " + slot + ":00:00").utc
-      # ap search
-      # puts "*********"
-      # puts "Timeslots"
-      # ap "class:#{@restaurant.timeslots.all.class}"
-      # puts "*********"
       result = @restaurant.timeslots.all.where("timing = ? AND capacity <= 0", search)
-      # result = @restaurant.timeslots.all.where(timing : search AND capacity <= 0)
-      # ap "Result:"
-      # ap result
-
       unless result.any?
         @available_slots << slot + ":00"
-      else
-        # puts "FULL for slot"
       end
     }
 
