@@ -8,6 +8,60 @@ class RestaurantsController < ApplicationController
   end
 
   def show
+    # ['Customer', 1], ['Restaurant Owner', 2]
+    int_open_time = (@restaurant.opening_time.strftime("%H")).to_i
+    int_close_time = (@restaurant.closing_time.strftime("%H")).to_i
+    @restaurant_slots = []
+    if int_close_time < int_open_time
+      (24 - int_open_time).times {|t|
+        @restaurant_slots << int_open_time + t
+      }
+      (0..int_close_time).each {|time|
+        @restaurant_slots << time
+      }
+    else
+      (int_open_time..int_close_time).each {|time|
+        @restaurant_slots << time
+      }
+    end
+    # puts "*************"
+    # puts @restaurant_slots
+    # puts "*************"
+
+    # Remove timeslots that are already full
+    # @restaurant.timeslots.each {|timeslot|
+    #   ap timeslot
+    # }
+    @available_slots = []
+    puts '*****************'
+    ap @restaurant.timeslots
+    @restaurant_slots.each {|slot|
+      if slot.to_s.length == 1
+        slot = "0" + slot.to_s
+      else
+        slot = slot.to_s
+      end
+      search = Time.now.utc.strftime("%d %b %Y")
+      # ap search
+      # search = "%" + search + " " + slot + "%"
+      search = DateTime.parse(search + " " + slot + ":00:00").utc
+      # ap search
+      # puts "*********"
+      # puts "Timeslots"
+      # ap "class:#{@restaurant.timeslots.all.class}"
+      # puts "*********"
+      result = @restaurant.timeslots.all.where("timing = ? AND capacity <= 0", search)
+      # result = @restaurant.timeslots.all.where(timing : search AND capacity <= 0)
+      # ap "Result:"
+      # ap result
+
+      unless result.any?
+        @available_slots << slot + ":00"
+      else
+        # puts "FULL for slot"
+      end
+    }
+
   end
 
   def new
