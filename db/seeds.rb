@@ -18,3 +18,5 @@ Restaurant.create(name: "Applebee's", address: "5700 Mavis Rd", city: "Mississau
 
 Role.create(role: "Customer")
 Role.create(role: "Restaurant Owner")
+
+User.create(name: "admin", password: "1234", password_confirmation: "1234", loyalty_points: 500, role_id: Role.last.id)

@@ -53,7 +53,7 @@ class RestaurantsController < ApplicationController
   end
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :address, :city, :price_range, :summary, :menu, :restaurant_id, :opening_time, :closing_time, :capacity)
+    params.require(:restaurant).permit(:name, :address, :city, :price_range, :summary, :menu, :restaurant_id, :opening_time, :closing_time, :capacity, :min_party, :max_party)
   end
 
   def ensure_ownership
