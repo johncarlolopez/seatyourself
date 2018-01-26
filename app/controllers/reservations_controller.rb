@@ -6,48 +6,9 @@ class ReservationsController < ApplicationController
 
 
   def show
-    # ['Customer', 1], ['Restaurant Owner', 2]
-    puts "*****************"
-    int_open_time = (@restaurant.opening_time.strftime("%H")).to_i
-    int_close_time = (@restaurant.closing_time.strftime("%H")).to_i
-    @restaurant_slots = []
-    if int_close_time < int_open_time
-      (24 - int_open_time).times {|t|
-        @restaurant_slots << int_open_time + t
-      }
-      (0..int_close_time).each {|time|
-        @restaurant_slots << time
-      }
-    else
-      (int_open_time..int_close_time).each {|time|
-        @restaurant_slots << time
-      }
-    end
-    puts "*************"
-    puts @restaurant_slots
-    puts "*************"
-
-    # Remove timeslots that are already full
-    # @restaurant.timeslots.each {|timeslot|
-    #   ap timeslot
-    # }
-    available_slots = []
-    @restaurant_slots.each {|slot|
-      if slot.length == 1
-        slot = "0" + slot.to_s
-      else
-        slot = slot.to_s
-      end
-      search = Time.now.utc.strftime("%d %b %Y " + slot )
-      result = @restaurant.timeslots.where("timing LIKE (?) AND restaurant_id = ? and capacity <= 0", search, @restaurant.id)
-      ap result
-    }
-
   end
 
   def new
-
-
   end
 
   def confirmation
@@ -64,16 +25,6 @@ class ReservationsController < ApplicationController
     @reservation.user_id = current_user.id
     @reservation.restaurant_id = params[:restaurant_id]
 
-    # Split reservation time into two variables, one for day, one for hour
-    # reservation_time = @reservation.time
-    # reservation_day = @reservation
-    # reservation_time = Time.parse(@reservation.time.strftime("%H") + ":00").utc
-    # string_reservation_time = @reservation.time.strftime("%H") + ":00"
-    # reservation_day = Date.parse(@reservation.time.strftime("%F")).utc
-    # string_reservation_day = @reservation.time.strftime("%d %b %Y")
-# ____
-    # search if timeslot exists? Use Timeslot.find_by(timing, day, restaurant_id)
-    # timeslot = Timeslot.find_by(timing: @reservation.time, restaurant_id: @restaurant.id)
     timeslot = Timeslot.where("timing = ? AND restaurant_id = ?", @reservation.time, @restaurant.id).first
     if @reservation.party_size > @restaurant.capacity
       flash[:alert] = []
