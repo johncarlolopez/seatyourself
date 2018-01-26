@@ -6,12 +6,8 @@ class ReservationsController < ApplicationController
 
 
   def show
-  end
-
-  def new
     # ['Customer', 1], ['Restaurant Owner', 2]
     puts "*****************"
-    # puts "*****************"
     int_open_time = (@restaurant.opening_time.strftime("%H")).to_i
     int_close_time = (@restaurant.closing_time.strftime("%H")).to_i
     @restaurant_slots = []
@@ -32,9 +28,24 @@ class ReservationsController < ApplicationController
     puts "*************"
 
     # Remove timeslots that are already full
-    @restaurant.timeslots.each {|timeslot|
-      ap timeslot
+    # @restaurant.timeslots.each {|timeslot|
+    #   ap timeslot
+    # }
+    available_slots = []
+    @restaurant_slots.each {|slot|
+      if slot.length == 1
+        slot = "0" + slot.to_s
+      else
+        slot = slot.to_s
+      end
+      search = Time.now.utc.strftime("%d %b %Y " + slot )
+      result = @restaurant.timeslots.where("timing LIKE (?) AND restaurant_id = ? and capacity <= 0", search, @restaurant.id)
+      ap result
     }
+
+  end
+
+  def new
 
 
   end

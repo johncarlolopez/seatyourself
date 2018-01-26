@@ -11,6 +11,11 @@
   <p><strong>Min Party Size:</strong> <%= @restaurant.min_party %></p>
   <p><strong>Max Party Size:</strong> <%= @restaurant.max_party %></p>
   <br>
+  <h3>Available Reservation Slots Today</h3>
+  <% @available_slots.each do |slot| %>
+    <p><%= slot %></p>
+  <% end  %>
+  <br>
   <p><%= link_to("Edit", edit_restaurant_path) %>|<%= link_to("Delete", restaurant_path(@restaurant.id), method: :delete, data: {confirm: "Are you sure you want to delete this restaurant?"}) %>
   </p>
   <p>
